@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import { GetAllClientesController } from './controller/cliente/GetAllClientesController';
-import { GetClienteController } from './controller/cliente/GetClienteController';
-import { CreateClienteController } from './controller/cliente/CreateClienteController';
-import { UpdateClienteController } from './controller/cliente/UpdateClienteController';
-import { DeleteClienteController } from './controller/cliente/DeleteClienteController';
+import { GetAllClientesController } from './controllers/cliente/GetAllClientesController';
+import { GetClienteController } from './controllers/cliente/GetClienteController';
+import { CreateClienteController } from './controllers/cliente/CreateClienteController';
+import { UpdateClienteController } from './controllers/cliente/UpdateClienteController';
+import { DeleteClienteController } from './controllers/cliente/DeleteClienteController';
 
 const routes = Router();
 
