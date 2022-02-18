@@ -19,7 +19,7 @@ export class CreateProduto1645213378368 implements MigrationInterface {
             isUnique: true,
           },
           {
-            name: 'fabricao',
+            name: 'fabricacao',
             type: 'varchar',
           },
           {
