@@ -2,16 +2,16 @@ import { getRepository } from 'typeorm';
 import { User } from '../../entities/User';
 
 export class DeleteUserService {
-  async execute(codigo_cliente: string) {
+  async execute(userCode: string) {
     try {
       const repo = getRepository(User);
 
-      const user = await repo.findOne(codigo_cliente);
+      const user = await repo.findOne(userCode);
       if (!user) {
         throw new Error('Cliente não existe');
       }
 
-      await repo.delete(codigo_cliente);
+      await repo.delete(userCode);
 
       return user;
     } catch (error) {

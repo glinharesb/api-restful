@@ -3,10 +3,10 @@ import { DeleteUserService } from '../../services/user/DeleteUserService';
 
 export class DeleteUserController {
   async handle(request: Request, response: Response) {
-    const { codigo_cliente } = request.params;
+    const userCode = request.params.id;
 
     const service = new DeleteUserService();
-    const result = await service.execute(codigo_cliente);
+    const result = await service.execute(userCode);
 
     if (result instanceof Error) {
       return response.status(400).json({ message: result.message });

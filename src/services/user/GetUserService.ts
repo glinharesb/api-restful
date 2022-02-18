@@ -2,10 +2,10 @@ import { getRepository } from 'typeorm';
 import { User } from '../../entities/User';
 
 export class GetUserService {
-  async execute(codigo_cliente: string) {
+  async execute(userCode: string) {
     try {
       const repo = getRepository(User);
-      const user = await repo.findOne(codigo_cliente);
+      const user = await repo.findOne(userCode);
 
       if (!user) {
         throw new Error('Cliente não existe');

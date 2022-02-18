@@ -3,10 +3,10 @@ import { DeleteProductService } from '../../services/product/DeleteProductServic
 
 export class DeleteProductController {
   async handle(request: Request, response: Response) {
-    const { codigo_produto } = request.params;
+    const productCode = request.params.id;
 
     const service = new DeleteProductService();
-    const result = await service.execute(codigo_produto);
+    const result = await service.execute(productCode);
 
     if (result instanceof Error) {
       return response.status(400).json({ message: result.message });

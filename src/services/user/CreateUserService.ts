@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 import { User } from '../../entities/User';
-import { isEmail } from '../../helpers/isEmail';
+import { isValidEmail } from '../../helpers/isValidEmail';
 
 type UserCreateService = {
   nome: string;
@@ -19,11 +19,14 @@ export class CreateUserService {
     try {
       const repo = getRepository(User);
 
-      if (await repo.findOne({ email })) {
-        throw new Error('E-mail já existe');
+      const findOneByEmail = await repo.findOne({ email });
+      const findOneByCpf = await repo.findOne({ cpf });
+
+      if (findOneByEmail || findOneByCpf) {
+        throw new Error('Cliente já existe');
       }
 
-      if (!isEmail(email)) {
+      if (!isValidEmail(email)) {
         throw new Error('E-mail inválido');
       }
 

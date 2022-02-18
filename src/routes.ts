@@ -14,17 +14,14 @@ import { GetProductController } from './controllers/product/GetProductController
 const routes = Router();
 
 routes.get('/clientes', new GetAllUsersController().handle);
-routes.get('/clientes/:codigo_cliente', new GetUserController().handle);
+routes.get('/clientes/:id', new GetUserController().handle);
 routes.post('/clientes', new CreateUserController().handle);
-routes.put('/clientes/:codigo_cliente', new UpdateUserController().handle);
-routes.delete('/clientes/:codigo_cliente', new DeleteUserController().handle);
+routes.put('/clientes/:id', new UpdateUserController().handle);
+routes.delete('/clientes/:id', new DeleteUserController().handle);
 
 routes.get('/produtos', new GetAllProductsController().handle);
-routes.get('/produtos/:codigo_produto', new GetProductController().handle);
+routes.get('/produtos/:id', new GetProductController().handle);
 routes.post('/produtos', new CreateProductController().handle);
-routes.delete(
-  '/produtos/:codigo_produto',
-  new DeleteProductController().handle
-);
+routes.delete('/produtos/:id', new DeleteProductController().handle);
 
 export { routes };

@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 import { User } from '../../entities/User';
-import { isEmail } from '../../helpers/isEmail';
+import { isValidEmail } from '../../helpers/isValidEmail';
 
 type UserUpdateService = {
   codigo_cliente: string;
@@ -25,7 +25,7 @@ export class UpdateUserService {
       user.sexo = sexo ? sexo : user.sexo;
       user.email = email ? email : user.email;
 
-      if (!isEmail(email)) {
+      if (!isValidEmail(email)) {
         throw new Error('E-mail inválido');
       }
 
