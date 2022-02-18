@@ -3,7 +3,7 @@ import { Cliente } from '../../entities/Cliente';
 import { isEmail } from '../../helpers/isEmail';
 
 type ClienteUpdateService = {
-  id: string;
+  codigo_cliente: string;
   nome: string;
   cpf: string;
   sexo: string;
@@ -11,9 +11,15 @@ type ClienteUpdateService = {
 };
 
 export class UpdateClienteService {
-  async execute({ id, nome, cpf, sexo, email }: ClienteUpdateService) {
+  async execute({
+    codigo_cliente,
+    nome,
+    cpf,
+    sexo,
+    email,
+  }: ClienteUpdateService) {
     const repo = getRepository(Cliente);
-    const cliente = await repo.findOne(id);
+    const cliente = await repo.findOne(codigo_cliente);
 
     if (!cliente) {
       return new Error('Cliente does not exists!');
