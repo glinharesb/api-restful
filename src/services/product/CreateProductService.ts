@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import { Product } from '../../entities/Product';
+import { isValidManufacturing } from '../../helpers/isValidManufacturing';
 
 type ProductCreateService = {
   nome: string;
@@ -22,7 +23,7 @@ export class CreateProductService {
         throw new Error('Produto já existe');
       }
 
-      const validate = this.validate(fabricacao);
+      const validate = isValidManufacturing(fabricacao);
       if (validate instanceof Error) {
         return validate;
       }
@@ -39,16 +40,6 @@ export class CreateProductService {
       return user;
     } catch (error) {
       return error;
-    }
-  }
-
-  private validate(manufacturing: string): void | Error {
-    const manufacturingTypes: string[] = ['nacional', 'importado'];
-
-    if (!manufacturingTypes.includes(manufacturing?.toLowerCase())) {
-      return new Error(
-        `A variável 'fabricacao' deve ser do tipo 'nacional' ou 'importado'`
-      );
     }
   }
 }
