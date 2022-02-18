@@ -3,9 +3,13 @@ import { Product } from '../../entities/Product';
 
 export class GetAllProductsService {
   async execute() {
-    const repo = getRepository(Product);
-    const clientes = await repo.find();
+    try {
+      const repo = getRepository(Product);
+      const products = await repo.find();
 
-    return clientes;
+      return products;
+    } catch (error) {
+      return error;
+    }
   }
 }
