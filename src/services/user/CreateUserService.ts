@@ -1,22 +1,22 @@
 import { getRepository } from 'typeorm';
-import { Cliente } from '../../entities/Cliente';
+import { User } from '../../entities/User';
 import { isEmail } from '../../helpers/isEmail';
 
-type ClienteCreateService = {
+type UserCreateService = {
   nome: string;
   cpf: string;
   sexo: string;
   email: string;
 };
 
-export class CreateClienteService {
+export class CreateUserService {
   async execute({
     nome,
     cpf,
     sexo,
     email,
-  }: ClienteCreateService): Promise<Cliente | Error> {
-    const repo = getRepository(Cliente);
+  }: UserCreateService): Promise<User | Error> {
+    const repo = getRepository(User);
 
     if (await repo.findOne({ email })) {
       return new Error('E-mail already exists');
@@ -26,15 +26,15 @@ export class CreateClienteService {
       return new Error('Invalid e-mail');
     }
 
-    const cliente = repo.create({
+    const user = repo.create({
       nome,
       cpf,
       sexo,
       email,
     });
 
-    await repo.save(cliente);
+    await repo.save(user);
 
-    return cliente;
+    return user;
   }
 }

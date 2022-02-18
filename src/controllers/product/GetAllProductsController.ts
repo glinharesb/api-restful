@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { GetAllProdutosService } from '../../services/produto/GetAllProdutosService';
+import { GetAllProductsService } from '../../services/product/GetAllProductsService';
 
-export class GetallProdutosController {
+export class GetAllProductsController {
   async handle(request: Request, response: Response) {
-    const service = new GetAllProdutosService();
+    const service = new GetAllProductsService();
     const clientes = await service.execute();
 
     return response.json(clientes);

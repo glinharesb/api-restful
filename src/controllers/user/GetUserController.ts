@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
-import { DeleteClienteService } from '../../services/cliente/DeleteClienteService';
+import { GetUserService } from '../../services/user/GetUserService';
 
-export class DeleteClienteController {
+export class GetUserController {
   async handle(request: Request, response: Response) {
     const { codigo_cliente } = request.params;
 
-    const service = new DeleteClienteService();
+    const service = new GetUserService();
     const result = await service.execute(codigo_cliente);
 
     if (result instanceof Error) {
       return response.status(400).json({ message: result.message });
     }
 
-    return response.status(204).end();
+    return response.json(result);
   }
 }

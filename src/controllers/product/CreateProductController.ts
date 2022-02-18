@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { CreateProdutoService } from '../../services/produto/CreateProdutoService';
+import { CreateProductService } from '../../services/product/CreateProductService';
 
-export class CreateProdutoController {
+export class CreateProductController {
   async handle(request: Request, response: Response) {
     const { nome, fabricacao, tamanho, valor } = request.body;
 
-    const service = new CreateProdutoService();
+    const service = new CreateProductService();
     const result = await service.execute({ nome, fabricacao, tamanho, valor });
 
     if (result instanceof Error) {

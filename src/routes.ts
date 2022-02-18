@@ -1,26 +1,23 @@
 import { Router } from 'express';
 
-import { GetAllClientesController } from './controllers/cliente/GetAllClientesController';
-import { GetClienteController } from './controllers/cliente/GetClienteController';
-import { CreateClienteController } from './controllers/cliente/CreateClienteController';
-import { UpdateClienteController } from './controllers/cliente/UpdateClienteController';
-import { DeleteClienteController } from './controllers/cliente/DeleteClienteController';
+import { GetAllUsersController } from './controllers/user/GetAllUsersController';
+import { GetUserController } from './controllers/user/GetUserController';
+import { CreateUserController } from './controllers/user/CreateUserController';
+import { UpdateUserController } from './controllers/user/UpdateUserController';
+import { DeleteUserController } from './controllers/user/DeleteUserController';
 
-import { GetallProdutosController } from './controllers/produto/GetAllProdutosController';
-import { CreateProdutoController } from './controllers/produto/CreateProdutoController';
+import { GetAllProductsController } from './controllers/product/GetAllProductsController';
+import { CreateProductController } from './controllers/product/CreateProductController';
 
 const routes = Router();
 
-routes.get('/clientes', new GetAllClientesController().handle);
-routes.get('/clientes/:codigo_cliente', new GetClienteController().handle);
-routes.post('/clientes', new CreateClienteController().handle);
-routes.put('/clientes/:codigo_cliente', new UpdateClienteController().handle);
-routes.delete(
-  '/clientes/:codigo_cliente',
-  new DeleteClienteController().handle
-);
+routes.get('/clientes', new GetAllUsersController().handle);
+routes.get('/clientes/:codigo_cliente', new GetUserController().handle);
+routes.post('/clientes', new CreateUserController().handle);
+routes.put('/clientes/:codigo_cliente', new UpdateUserController().handle);
+routes.delete('/clientes/:codigo_cliente', new DeleteUserController().handle);
 
-routes.get('/produtos', new GetallProdutosController().handle);
-routes.post('/produtos', new CreateProdutoController().handle);
+routes.get('/produtos', new GetAllProductsController().handle);
+routes.post('/produtos', new CreateProductController().handle);
 
 export { routes };

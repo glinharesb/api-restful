@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity('clientes')
-export class Cliente {
+export class User {
   @PrimaryGeneratedColumn()
   codigo_cliente: number;
 

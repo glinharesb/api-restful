@@ -1,21 +1,21 @@
 import { getRepository } from 'typeorm';
-import { Produto } from '../../entities/Produto';
+import { Product } from '../../entities/Product';
 
-type ProdutoCreateService = {
+type ProductCreateService = {
   nome: string;
   fabricacao: string;
   tamanho: string;
   valor: string;
 };
 
-export class CreateProdutoService {
+export class CreateProductService {
   async execute({
     nome,
     fabricacao,
     tamanho,
     valor,
-  }: ProdutoCreateService): Promise<Produto | Error> {
-    const repo = getRepository(Produto);
+  }: ProductCreateService): Promise<Product | Error> {
+    const repo = getRepository(Product);
 
     if (await repo.findOne({ nome })) {
       return new Error('Produto já existe');
