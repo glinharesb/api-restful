@@ -16,7 +16,7 @@ export class UpdateUserService {
     const user = await repo.findOne(codigo_cliente);
 
     if (!user) {
-      return new Error('User does not exists!');
+      return new Error('Cliente não existe');
     }
 
     user.nome = nome ? nome : user.nome;
@@ -25,7 +25,7 @@ export class UpdateUserService {
     user.email = email ? email : user.email;
 
     if (!isEmail(email)) {
-      return new Error('Invalid e-mail');
+      return new Error('E-mail inválido');
     }
 
     await repo.save(user);

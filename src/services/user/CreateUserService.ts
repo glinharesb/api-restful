@@ -19,11 +19,11 @@ export class CreateUserService {
     const repo = getRepository(User);
 
     if (await repo.findOne({ email })) {
-      return new Error('E-mail already exists');
+      return new Error('E-mail já existe');
     }
 
     if (!isEmail(email)) {
-      return new Error('Invalid e-mail');
+      return new Error('E-mail inválido');
     }
 
     const user = repo.create({
