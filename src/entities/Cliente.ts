@@ -28,10 +28,4 @@ export class Cliente {
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  constructor() {
-    // if (!this.codigo_cliente) {
-    //   this.codigo_cliente = 1;
-    // }
-  }
 }
