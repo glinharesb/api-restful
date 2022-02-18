@@ -6,6 +6,9 @@ import { CreateClienteController } from './controllers/cliente/CreateClienteCont
 import { UpdateClienteController } from './controllers/cliente/UpdateClienteController';
 import { DeleteClienteController } from './controllers/cliente/DeleteClienteController';
 
+import { GetallProdutosController } from './controllers/produto/GetAllProdutosController';
+import { CreateProdutoController } from './controllers/produto/CreateProdutoController';
+
 const routes = Router();
 
 routes.get('/clientes', new GetAllClientesController().handle);
@@ -16,5 +19,8 @@ routes.delete(
   '/clientes/:codigo_cliente',
   new DeleteClienteController().handle
 );
+
+routes.get('/produtos', new GetallProdutosController().handle);
+routes.post('/produtos', new CreateProdutoController().handle);
 
 export { routes };
