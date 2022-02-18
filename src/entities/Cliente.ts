@@ -9,7 +9,7 @@ import {
 @Entity('clientes')
 export class Cliente {
   @PrimaryGeneratedColumn()
-  id: number;
+  codigo_cliente: number;
 
   @Column()
   nome: string;
@@ -30,8 +30,8 @@ export class Cliente {
   updated_at: Date;
 
   constructor() {
-    // if (!this.id) {
-    //   this.id = 1;
+    // if (!this.codigo_cliente) {
+    //   this.codigo_cliente = 1;
     // }
   }
 }

@@ -7,7 +7,7 @@ export class CreateClientes1645202083396 implements MigrationInterface {
         name: 'clientes',
         columns: [
           {
-            name: 'id',
+            name: 'codigo_cliente',
             type: 'int',
             isPrimary: true,
             isGenerated: true,

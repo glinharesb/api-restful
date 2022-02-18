@@ -9,9 +9,12 @@ import { DeleteClienteController } from './controller/cliente/DeleteClienteContr
 const routes = Router();
 
 routes.get('/clientes', new GetAllClientesController().handle);
-routes.get('/clientes/:id', new GetClienteController().handle);
+routes.get('/clientes/:codigo_cliente', new GetClienteController().handle);
 routes.post('/clientes', new CreateClienteController().handle);
-routes.put('/clientes/:id', new UpdateClienteController().handle);
-routes.delete('/clientes/:id', new DeleteClienteController().handle);
+routes.put('/clientes/:codigo_cliente', new UpdateClienteController().handle);
+routes.delete(
+  '/clientes/:codigo_cliente',
+  new DeleteClienteController().handle
+);
 
 export { routes };
