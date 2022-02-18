@@ -19,7 +19,7 @@ export class CreateProductService {
       const repo = getRepository(Product);
 
       if (await repo.findOne({ nome })) {
-        return new Error('Produto já existe');
+        throw new Error('Produto já existe');
       }
 
       const validate = this.validate(fabricacao);
@@ -42,8 +42,8 @@ export class CreateProductService {
     }
   }
 
-  private validate(manufacturing: string) {
-    const manufacturingTypes = ['nacional', 'importado'];
+  private validate(manufacturing: string): void | Error {
+    const manufacturingTypes: string[] = ['nacional', 'importado'];
 
     if (!manufacturingTypes.includes(manufacturing?.toLowerCase())) {
       return new Error(

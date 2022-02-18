@@ -16,25 +16,29 @@ export class CreateUserService {
     sexo,
     email,
   }: UserCreateService): Promise<User | Error> {
-    const repo = getRepository(User);
+    try {
+      const repo = getRepository(User);
 
-    if (await repo.findOne({ email })) {
-      return new Error('E-mail já existe');
+      if (await repo.findOne({ email })) {
+        throw new Error('E-mail já existe');
+      }
+
+      if (!isEmail(email)) {
+        throw new Error('E-mail inválido');
+      }
+
+      const user = repo.create({
+        nome,
+        cpf,
+        sexo,
+        email,
+      });
+
+      await repo.save(user);
+
+      return user;
+    } catch (error) {
+      return error;
     }
-
-    if (!isEmail(email)) {
-      return new Error('E-mail inválido');
-    }
-
-    const user = repo.create({
-      nome,
-      cpf,
-      sexo,
-      email,
-    });
-
-    await repo.save(user);
-
-    return user;
   }
 }

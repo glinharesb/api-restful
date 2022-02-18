@@ -12,24 +12,28 @@ type UserUpdateService = {
 
 export class UpdateUserService {
   async execute({ codigo_cliente, nome, cpf, sexo, email }: UserUpdateService) {
-    const repo = getRepository(User);
-    const user = await repo.findOne(codigo_cliente);
+    try {
+      const repo = getRepository(User);
+      const user = await repo.findOne(codigo_cliente);
 
-    if (!user) {
-      return new Error('Cliente não existe');
+      if (!user) {
+        throw new Error('Cliente não existe');
+      }
+
+      user.nome = nome ? nome : user.nome;
+      user.cpf = cpf ? cpf : user.cpf;
+      user.sexo = sexo ? sexo : user.sexo;
+      user.email = email ? email : user.email;
+
+      if (!isEmail(email)) {
+        throw new Error('E-mail inválido');
+      }
+
+      await repo.save(user);
+
+      return user;
+    } catch (error) {
+      return error;
     }
-
-    user.nome = nome ? nome : user.nome;
-    user.cpf = cpf ? cpf : user.cpf;
-    user.sexo = sexo ? sexo : user.sexo;
-    user.email = email ? email : user.email;
-
-    if (!isEmail(email)) {
-      return new Error('E-mail inválido');
-    }
-
-    await repo.save(user);
-
-    return user;
   }
 }
