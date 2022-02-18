@@ -8,6 +8,7 @@ import { DeleteUserController } from './controllers/user/DeleteUserController';
 
 import { GetAllProductsController } from './controllers/product/GetAllProductsController';
 import { CreateProductController } from './controllers/product/CreateProductController';
+import { DeleteProductController } from './controllers/product/DeleteProductController';
 
 const routes = Router();
 
@@ -19,5 +20,9 @@ routes.delete('/clientes/:codigo_cliente', new DeleteUserController().handle);
 
 routes.get('/produtos', new GetAllProductsController().handle);
 routes.post('/produtos', new CreateProductController().handle);
+routes.delete(
+  '/produtos/:codigo_produto',
+  new DeleteProductController().handle
+);
 
 export { routes };
