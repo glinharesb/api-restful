@@ -105,8 +105,19 @@ export class ProductsController {
 
   @Get()
   async findAll(@Res() res: Response) {
-    const users = await this.productsService.findAll();
+    const result = await this.productsService.findAll();
 
-    res.status(HttpStatus.OK).json(users);
+    if (result instanceof Error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          message: [result.message],
+          error: 'Bad Request',
+        },
+        HttpStatus.FORBIDDEN
+      );
+    }
+
+    res.status(HttpStatus.OK).json(result);
   }
 }

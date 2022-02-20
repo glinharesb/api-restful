@@ -18,7 +18,7 @@ export class ProductsService {
       if (
         await this.productsRepository.findOne({ nome: createProductDto.nome })
       ) {
-        throw new Error('Produto já existe');
+        throw new Error('product already exists');
       }
 
       const product = new Product();
@@ -40,7 +40,7 @@ export class ProductsService {
       );
 
       if (!product) {
-        throw new Error('Produto não existe');
+        throw new Error('product does not exists');
       }
 
       product.nome = updateUserDto.nome ? updateUserDto.nome : product.nome;
@@ -63,7 +63,7 @@ export class ProductsService {
       const user = await this.productsRepository.findOne(id);
 
       if (!user) {
-        throw new Error('Produto não existe');
+        throw new Error('product does not exists');
       }
 
       await this.productsRepository.delete(id);
@@ -88,7 +88,11 @@ export class ProductsService {
     }
   }
 
-  async findAll(): Promise<Product[]> {
-    return this.productsRepository.find();
+  async findAll(): Promise<Product[] | Error> {
+    try {
+      return this.productsRepository.find();
+    } catch (error) {
+      return error;
+    }
   }
 }
