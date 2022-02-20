@@ -1,3 +1,4 @@
+import { existsSync } from 'fs';
 import { createConnection } from 'typeorm';
 
 export async function connectToDatabase() {
@@ -13,13 +14,12 @@ export async function connectToDatabase() {
     try {
       console.log('~> Trying to connect with sqlite...');
 
-      // connect using sqlite
       await createConnection({
         type: 'sqlite',
         database: './src/database/db.sqlite3',
-        migrationsRun: true,
         migrations: ['./src/database/migrations/*.ts'],
         entities: ['./src/entities/*.ts'],
+        migrationsRun: !existsSync('./src/database/db.sqlite3'),
       });
 
       console.log('~> Successfully :)');
