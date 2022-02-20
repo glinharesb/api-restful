@@ -1,6 +1,7 @@
 ## Descrição
 
 RESTFul API utilizando Express e TypeORM (MySQL).
+
 Também possui uma versão utilizando NestJS: https://github.com/glinharesb/api-restful/tree/nest
 
 ## Rotas
@@ -29,7 +30,7 @@ Produtos:
 
 Requisitos:
 - Node.js 16 (foi utilizado a versão 16.13.1 durante os testes)
-- MySQL/MariaDB (foi utilizando o MySQL 8.0.28 e MariaDB 10.4.21 durante os testes)
+- MySQL/MariaDB (foi utilizado o MySQL 8.0.28 e MariaDB 10.4.21 durante os testes)
 
 Caso queira rodar o banco de dados localmente, renomeie o arquivo .env.dist para .env
 
