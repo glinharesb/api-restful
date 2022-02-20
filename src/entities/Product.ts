@@ -21,7 +21,7 @@ export class Product {
   tamanho: string;
 
   @Column()
-  valor: string;
+  valor: number;
 
   @CreateDateColumn()
   created_at: Date;

@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import { Product } from '../../entities/Product';
+import { isEmpty } from '../../helpers/isEmpty';
 import { isValidManufacturing } from '../../helpers/isValidManufacturing';
 
 type ProductCreateService = {
@@ -17,10 +18,21 @@ export class CreateProductService {
     valor,
   }: ProductCreateService): Promise<Product | Error> {
     try {
+      const generalValidate = isEmpty({
+        nome,
+        fabricacao,
+        tamanho,
+        valor,
+      });
+
+      if (generalValidate.length > 0) {
+        throw new Error(generalValidate[0]);
+      }
+
       const repo = getRepository(Product);
 
       if (await repo.findOne({ nome })) {
-        throw new Error('Produto já existe');
+        throw new Error('product already exists');
       }
 
       const validate = isValidManufacturing(fabricacao);

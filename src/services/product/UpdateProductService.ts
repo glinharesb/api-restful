@@ -7,7 +7,7 @@ type ProductUpdateService = {
   nome: string;
   fabricacao: string;
   tamanho: string;
-  valor: string;
+  valor: number;
 };
 
 export class UpdateProductService {
@@ -23,7 +23,7 @@ export class UpdateProductService {
       const product = await repo.findOne(codigo_produto);
 
       if (!product) {
-        throw new Error('Produto não existe');
+        throw new Error('product does not exists');
       }
 
       product.nome = nome ? nome : product.nome;

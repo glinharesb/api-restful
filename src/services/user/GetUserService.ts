@@ -8,7 +8,7 @@ export class GetUserService {
       const user = await repo.findOne(userCode);
 
       if (!user) {
-        throw new Error('Cliente não existe');
+        throw new Error('user does not exists');
       }
 
       return user;

@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import { User } from '../../entities/User';
+import { isEmpty } from '../../helpers/isEmpty';
 import { isValidEmail } from '../../helpers/isValidEmail';
 
 type UserCreateService = {
@@ -17,17 +18,22 @@ export class CreateUserService {
     email,
   }: UserCreateService): Promise<User | Error> {
     try {
+      const validate = isEmpty({ nome, cpf, sexo, email });
+      if (validate.length > 0) {
+        throw new Error(validate[0]);
+      }
+
       const repo = getRepository(User);
 
       const findOneByEmail = await repo.findOne({ email });
       const findOneByCpf = await repo.findOne({ cpf });
 
       if (findOneByEmail || findOneByCpf) {
-        throw new Error('Cliente já existe');
+        throw new Error('user already exists');
       }
 
       if (!isValidEmail(email)) {
-        throw new Error('E-mail inválido');
+        throw new Error('invalid email');
       }
 
       const user = repo.create({

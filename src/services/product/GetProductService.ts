@@ -8,7 +8,7 @@ export class GetProductService {
       const product = await repo.findOne(productCode);
 
       if (!product) {
-        throw new Error('Produto não existe');
+        throw new Error('product does not exists');
       }
 
       return product;
