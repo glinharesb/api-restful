@@ -75,7 +75,17 @@ export class ProductsService {
   }
 
   async findOne(id: string): Promise<Product> {
-    return this.productsRepository.findOne(id);
+    try {
+      const product = await this.productsRepository.findOne(id);
+
+      if (!product) {
+        throw new Error('product does not exists');
+      }
+
+      return product;
+    } catch (error) {
+      return error;
+    }
   }
 
   async findAll(): Promise<Product[]> {

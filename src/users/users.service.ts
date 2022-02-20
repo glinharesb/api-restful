@@ -24,7 +24,7 @@ export class UsersService {
       });
 
       if (findOneByEmail || findOneByCpf) {
-        throw new Error('Cliente já existe');
+        throw new Error('cliente already exists');
       }
 
       const user = new User();
@@ -39,14 +39,15 @@ export class UsersService {
     }
   }
 
-  async update(updateUserDto: UpdateUserDto): Promise<User | Error> {
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto
+  ): Promise<User | Error> {
     try {
-      const user = await this.usersRepository.findOne(
-        updateUserDto.codigo_cliente
-      );
+      const user = await this.usersRepository.findOne(id);
 
       if (!user) {
-        throw new Error('Cliente não existe');
+        throw new Error('cliente does not exists');
       }
 
       user.nome = updateUserDto.nome ? updateUserDto.nome : user.nome;
@@ -65,7 +66,7 @@ export class UsersService {
       const user = await this.usersRepository.findOne(id);
 
       if (!user) {
-        throw new Error('Cliente não existe');
+        throw new Error('cliente does not exists');
       }
 
       await this.usersRepository.delete(id);
@@ -76,8 +77,18 @@ export class UsersService {
     }
   }
 
-  async findOne(id: string): Promise<User> {
-    return this.usersRepository.findOne(id);
+  async findOne(id: string): Promise<User | Error> {
+    try {
+      const user = await this.usersRepository.findOne(id);
+
+      if (!user) {
+        throw new Error('cliente does not exists');
+      }
+
+      return user;
+    } catch (error) {
+      return error;
+    }
   }
 
   async findAll(): Promise<User[]> {

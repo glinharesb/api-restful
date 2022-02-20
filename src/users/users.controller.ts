@@ -10,9 +10,12 @@ import {
   HttpStatus,
   HttpException,
   Body,
+  ValidationPipe,
+  UsePipes,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 
@@ -21,6 +24,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe())
   async create(@Body() createUserDto: CreateUserDto): Promise<User | Error> {
     const result = await this.usersService.create(createUserDto);
 
@@ -28,7 +32,8 @@ export class UsersController {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: 'Cliente já existe',
+          message: [result.message],
+          error: 'Bad Request',
         },
         HttpStatus.FORBIDDEN
       );
@@ -40,18 +45,16 @@ export class UsersController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() createUserDto: CreateUserDto
+    @Body() updateUserDto: UpdateUserDto
   ): Promise<User | Error> {
-    const result = await this.usersService.update({
-      codigo_cliente: id,
-      ...createUserDto,
-    });
+    const result = await this.usersService.update(id, updateUserDto);
 
     if (result instanceof Error) {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: result.message,
+          message: [result.message],
+          error: 'Bad Request',
         },
         HttpStatus.FORBIDDEN
       );
@@ -68,7 +71,8 @@ export class UsersController {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: result.message,
+          message: [result.message],
+          error: 'Bad Request',
         },
         HttpStatus.FORBIDDEN
       );
@@ -79,19 +83,20 @@ export class UsersController {
 
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response) {
-    const user = await this.usersService.findOne(id);
+    const result = await this.usersService.findOne(id);
 
-    if (!user) {
+    if (result instanceof Error) {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: 'Cliente não existe',
+          message: [result.message],
+          error: 'Bad Request',
         },
         HttpStatus.FORBIDDEN
       );
     }
 
-    res.status(HttpStatus.OK).json(user);
+    res.status(HttpStatus.OK).json(result);
   }
 
   @Get()

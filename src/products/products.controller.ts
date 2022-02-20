@@ -33,7 +33,8 @@ export class ProductsController {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: result.message,
+          message: [result.message],
+          error: 'Bad Request',
         },
         HttpStatus.FORBIDDEN
       );
@@ -56,7 +57,8 @@ export class ProductsController {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: result.message,
+          message: [result.message],
+          error: 'Bad Request',
         },
         HttpStatus.FORBIDDEN
       );
@@ -73,7 +75,8 @@ export class ProductsController {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: result.message,
+          message: [result.message],
+          error: 'Bad Request',
         },
         HttpStatus.FORBIDDEN
       );
@@ -84,19 +87,20 @@ export class ProductsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response) {
-    const product = await this.productsService.findOne(id);
+    const result = await this.productsService.findOne(id);
 
-    if (!product) {
+    if (result instanceof Error) {
       throw new HttpException(
         {
           status: HttpStatus.BAD_REQUEST,
-          error: 'Cliente não existe',
+          message: [result.message],
+          error: 'Bad Request',
         },
         HttpStatus.FORBIDDEN
       );
     }
 
-    res.status(HttpStatus.OK).json(product);
+    res.status(HttpStatus.OK).json(result);
   }
 
   @Get()
