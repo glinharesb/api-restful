@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(routes);
 
-const PORT = 3333;
+const PORT = Number(process.env.APP_PORT) || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server listening on: http://localhost:${PORT}`);
 });

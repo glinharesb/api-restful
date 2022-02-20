@@ -8,7 +8,7 @@ export class CreateUser1645215422957 implements MigrationInterface {
         columns: [
           {
             name: 'codigo_cliente',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'increment',

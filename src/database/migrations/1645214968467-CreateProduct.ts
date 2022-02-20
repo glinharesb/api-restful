@@ -8,7 +8,7 @@ export class CreateProduct1645214968467 implements MigrationInterface {
         columns: [
           {
             name: 'codigo_produto',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'increment',
