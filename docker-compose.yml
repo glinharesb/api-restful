@@ -4,6 +4,7 @@ services:
   app:
     build: .
     command: sh -c "npm run typeorm migration:run && npm run dev"
+    restart: always
     depends_on:
       - mysql
     ports:
@@ -14,8 +15,8 @@ services:
       - .env.dist
   mysql:
     image: mysql:latest
+    restart: always
     environment:
-      MYSQL_USER: root
       MYSQL_DATABASE: apirestful
       MYSQL_ALLOW_EMPTY_PASSWORD: true
     ports:
