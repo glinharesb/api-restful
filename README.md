@@ -1,6 +1,6 @@
 ## Descrição
 
-RESTFul API utilizando Express e TypeORM (MySQL).
+RESTful API utilizando Express e TypeORM (MySQL).
 
 Também possui uma versão utilizando NestJS: https://github.com/glinharesb/api-restful/tree/nest
 
