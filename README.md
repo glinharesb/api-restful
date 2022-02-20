@@ -1,73 +1,91 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## :book: Descrição
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+RESTful API utilizando NestJS e TypeORM (MySQL).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## :open_file_folder: Rotas
 
-## Description
+Clientes:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+| MÉTODO | ENDPOINT| DESCRIÇÃO|
+|-|-|-|
+| GET| /clientes| Retorna todos os clientes|
+| GET| /clientes/:id| Retorna um cliente específico|
+|POST|/clientes|Insere um novo cliente|
+|PUT|/clientes/:id|Atualiza um cliente específico|
+|DELETE|/clientes/:id|Exclui um cliente específico
 
-## Installation
+Produtos:
 
-```bash
-$ npm install
+| MÉTODO | ENDPOINT| DESCRIÇÃO|
+|-|-|-|
+| GET| /produtos| Retorna todos os produtos|
+| GET| /produtos/:id| Retorna um produto específico|
+|POST|/produtos|Insere um novo produto|
+|PUT|/produtos/:id|Atualiza um produto específico|
+|DELETE|/produtos/:id|Exclui um produto específico
+
+## :rocket: Instalação 
+
+Requisitos:
+- Node.js 16 (foi utilizado a versão 16.13.1 durante os testes)
+- MySQL/MariaDB (foi utilizado o MySQL 8.0.28 e MariaDB 10.4.21 durante os testes)
+
+1. Renomeie o arquivo .env.dist para .env
+- Obs.: caso queira utilizar o Docker, apenas renomeie o arquivo e pule esta etapa.
+- Exemplo de configuração utilizando SQLite:
+
+```
+# app config
+APP_PORT=3000
+
+# typeorm config for sqlite
+TYPEORM_CONNECTION=sqlite
+TYPEORM_DATABASE=src/database/db.sqlite3
 ```
 
-## Running the app
+- Ou utilizando MySQL:
+```
+# app config
+APP_PORT=3000
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# typeorm config for mysql
+TYPEORM_CONNECTION=mysql
+TYPEORM_HOST=localhost
+TYPEORM_USERNAME=root
+TYPEORM_PASSWORD=apirestful
+TYPEORM_DATABASE=apirestful
+TYPEORM_PORT=3306
 ```
 
-## Test
+2. Após o banco de dados ser configurado corretamente, execute os seguintes comandos:
 
 ```bash
-# unit tests
-$ npm run test
+# instalar as dependências
+npm install
 
-# e2e tests
-$ npm run test:e2e
+# gerar a build da aplicação
+npm run build
 
-# test coverage
-$ npm run test:cov
+# iniciar a aplicção
+npm run start:prod
 ```
 
-## Support
+## :whale: Docker
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Requisito:
+- Docker (foi utilizado a versão 20.10.12 durante os testes)
 
-## Stay in touch
+Após ter renomeado o arquivo .env.dist para .env, execute o seguinte comando:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+docker compose up --build
+```
 
-## License
+Ou utilizando o modo detach (liberar o terminal para outros usos):
 
-Nest is [MIT licensed](LICENSE).
+
+```bash
+docker compose up --build -d
+```
+
+Após gerado a build e iniciado os containers, a API estará disponível no seguinte endereço: http://localhost:3000
