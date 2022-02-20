@@ -3,6 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
+import { ProductsController } from './products/products.controller';
+import { ProductsService } from './products/products.service';
+import { Product } from './products/product.entity';
 
 @Module({
   imports: [
@@ -13,12 +16,12 @@ import { UsersService } from './users/users.service';
       username: 'root',
       password: '',
       database: 'apirestful',
-      entities: [User],
+      entities: [User, Product],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Product]),
   ],
-  controllers: [UsersController],
-  providers: [UsersService],
+  controllers: [UsersController, ProductsController],
+  providers: [UsersService, ProductsService],
 })
 export class AppModule {}
