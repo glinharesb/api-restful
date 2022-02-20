@@ -6,18 +6,16 @@ import { UsersService } from './users/users.service';
 import { ProductsController } from './products/products.controller';
 import { ProductsService } from './products/products.service';
 import { Product } from './products/product.entity';
+import { getConnectionOptions } from 'typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'apirestful',
-      entities: [User, Product],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      useFactory: async () =>
+        Object.assign(await getConnectionOptions(), {
+          entities: [User, Product],
+          migrations: ['.src/database/migrations/*.ts'],
+        }),
     }),
     TypeOrmModule.forFeature([User, Product]),
   ],

@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: apirestful_app
+    command: sh -c "npm install && npm run build && npm run start:prod"
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    volumes:
+      - .:/usr/app
+    networks:
+      - apirestful
+  mysql:
+    image: mysql:8.0.28
+    container_name: apirestful_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3307:3306"
+    volumes:
+      - .:/usr/mysql
+    networks:
+      - apirestful
+networks:
+  apirestful:
