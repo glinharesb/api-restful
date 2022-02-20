@@ -6,7 +6,7 @@ Também possui uma versão utilizando NestJS: https://github.com/glinharesb/api-
 
 ## :open_file_folder: Rotas
 
-Clientes:
+- Clientes:
 
 | MÉTODO | ENDPOINT| DESCRIÇÃO|
 |-|-|-|
@@ -16,7 +16,17 @@ Clientes:
 |PUT|/clientes/:id|Atualiza um cliente específico|
 |DELETE|/clientes/:id|Exclui um cliente específico
 
-Produtos:
+Exemplo de JSON:
+```json
+{
+  "nome": "Gabriel Linhares",
+  "cpf": "12345678901",
+  "sexo": "Masculino",
+  "email": "glinharesb@gmail.com"
+}
+```
+
+- Produtos:
 
 | MÉTODO | ENDPOINT| DESCRIÇÃO|
 |-|-|-|
@@ -25,6 +35,16 @@ Produtos:
 |POST|/produtos|Insere um novo produto|
 |PUT|/produtos/:id|Atualiza um produto específico|
 |DELETE|/produtos/:id|Exclui um produto específico
+
+Exemplo de JSON:
+```json
+{
+  "nome": "Camiseta",
+  "fabricacao": "Nacional",
+  "tamanho": "M",
+  "valor": 50.10
+}
+```
 
 ## :rocket: Instalação 
 
