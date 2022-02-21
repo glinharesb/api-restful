@@ -24,7 +24,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - ./cache/mysql:/var/lib/mysql
     networks:
       - apirestful
 networks:
