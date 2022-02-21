@@ -104,3 +104,4 @@ dist
 .tern-port
 
 *.sqlite3
+mysql_data
