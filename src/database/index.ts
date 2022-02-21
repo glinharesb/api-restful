@@ -1,5 +1,6 @@
-import { existsSync } from 'fs';
 import { createConnection } from 'typeorm';
+import path from 'path';
+import { existsSync } from 'fs';
 
 export async function connectToDatabase() {
   try {
@@ -16,10 +17,10 @@ export async function connectToDatabase() {
 
       await createConnection({
         type: 'sqlite',
-        database: './src/database/db.sqlite3',
-        migrations: ['./src/database/migrations/*.ts'],
-        entities: ['./src/entities/*.ts'],
-        migrationsRun: !existsSync('./src/database/db.sqlite3'),
+        database: path.join(__dirname, 'db.sqlite3'),
+        migrations: [path.join(__dirname, 'migrations', '*.ts')],
+        entities: [path.join(__dirname, '..', 'entities', '*.ts')],
+        migrationsRun: !existsSync(path.join(__dirname, 'db.sqlite3')),
       });
 
       console.log('~> Successfully :)');
