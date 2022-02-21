@@ -7,7 +7,7 @@ type ProductCreateService = {
   nome: string;
   fabricacao: string;
   tamanho: string;
-  valor: string;
+  valor: number;
 };
 
 export class CreateProductService {
