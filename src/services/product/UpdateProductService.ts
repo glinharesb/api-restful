@@ -31,7 +31,7 @@ export class UpdateProductService {
       product.tamanho = tamanho ? tamanho : product.tamanho;
       product.valor = valor ? valor : product.valor;
 
-      const validate = isValidManufacturing(fabricacao);
+      const validate = isValidManufacturing(product.fabricacao);
       if (validate instanceof Error) {
         return validate;
       }

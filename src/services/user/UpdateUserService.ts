@@ -25,7 +25,7 @@ export class UpdateUserService {
       user.sexo = sexo ? sexo : user.sexo;
       user.email = email ? email : user.email;
 
-      if (!isValidEmail(email)) {
+      if (!isValidEmail(user.email)) {
         throw new Error('invalid email');
       }
 
