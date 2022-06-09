@@ -1,10 +1,10 @@
-## :book: Descrição
+## Descrição
 
 RESTful API utilizando Express e TypeORM (MySQL).
 
 Também possui uma versão utilizando NestJS: https://github.com/glinharesb/api-restful/tree/nest
 
-## :open_file_folder: Rotas
+## Rotas
 
 - Clientes:
 
@@ -46,7 +46,7 @@ Exemplo de JSON:
 }
 ```
 
-## :rocket: Instalação 
+## Instalação 
 
 Requisitos:
 - Node.js 16 (foi utilizado a versão 16.13.1 durante os testes)
@@ -104,7 +104,7 @@ npm run typeorm migration:run
 npm run dev
 ```
 
-## :whale: Docker
+## Docker
 
 Requisito:
 - Docker (foi utilizado a versão 20.10.12 durante os testes)
