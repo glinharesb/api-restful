@@ -1,14 +1,14 @@
-## Descrição
+# api-restful
 
-RESTful API utilizando Express e TypeORM (MySQL).
+RESTful API using Express and TypeORM (MySQL).
 
-Também possui uma versão utilizando NestJS: https://github.com/glinharesb/api-restful/tree/nest
+It also has a version using NestJS: https://github.com/glinharesb/api-restful/tree/nest
 
-## Rotas
+## Routes
 
 - Clientes:
 
-| MÉTODO | ENDPOINT| DESCRIÇÃO|
+| METHOD | ENDPOINT| DESCRIPTION|
 |-|-|-|
 | GET| /clientes| Retorna todos os clientes|
 | GET| /clientes/:id| Retorna um cliente específico|
@@ -16,7 +16,7 @@ Também possui uma versão utilizando NestJS: https://github.com/glinharesb/api-
 |PUT|/clientes/:id|Atualiza um cliente específico|
 |DELETE|/clientes/:id|Exclui um cliente específico
 
-Exemplo de JSON:
+JSON example:
 ```json
 {
   "nome": "Gabriel Linhares",
@@ -28,7 +28,7 @@ Exemplo de JSON:
 
 - Produtos:
 
-| MÉTODO | ENDPOINT| DESCRIÇÃO|
+| METHOD | ENDPOINT| DESCRIPTION|
 |-|-|-|
 | GET| /produtos| Retorna todos os produtos|
 | GET| /produtos/:id| Retorna um produto específico|
@@ -36,7 +36,7 @@ Exemplo de JSON:
 |PUT|/produtos/:id|Atualiza um produto específico|
 |DELETE|/produtos/:id|Exclui um produto específico
 
-Exemplo de JSON:
+JSON example:
 ```json
 {
   "nome": "Camiseta",
@@ -46,15 +46,15 @@ Exemplo de JSON:
 }
 ```
 
-## Instalação 
+## Installation 
 
-Requisitos:
-- Node.js 16 (foi utilizado a versão 16.13.1 durante os testes)
-- MySQL/MariaDB (foi utilizado o MySQL 8.0.28 e MariaDB 10.4.21 durante os testes)
+Requirements:
+- Node.js 16 (version 16.13.1 was used during testing)
+- MySQL/MariaDB (MySQL 8.0.28 and MariaDB 10.4.21 were used during testing)
 
-1. Renomeie o arquivo .env.dist para .env
-- Obs.: caso queira utilizar o Docker, apenas renomeie o arquivo e pule esta etapa.
-- Exemplo de configuração utilizando SQLite:
+1. Rename the .env.dist file to .env
+- Note: if you want to use Docker, just rename the file and skip this step.
+- Configuration example using SQLite:
 
 ```
 # app config
@@ -71,7 +71,7 @@ TYPEORM_ENTITIES=src/entities/*.ts
 TYPEORM_ENTITIES_DIR=src/entities
 ```
 
-- Ou utilizando MySQL:
+- Using MySQL:
 ```
 # app config
 APP_PORT=3000
@@ -91,35 +91,35 @@ TYPEORM_ENTITIES=src/entities/*.ts
 TYPEORM_ENTITIES_DIR=src/entities
 ```
 
-2. Após o banco de dados ser configurado corretamente, execute os seguintes comandos:
+2. After the database is properly configured, run the following commands:
 
 ```bash
-# instalar as dependências
+# install dependencies
 npm install
 
-# criar as tabelas no banco de dados
+# create tables in database
 npm run typeorm migration:run
 
-# iniciar a aplicação
+# start application
 npm run dev
 ```
 
 ## Docker
 
-Requisito:
-- Docker (foi utilizado a versão 20.10.12 durante os testes)
+Requirement:
+- Docker (version 20.10.12 was used during testing)
 
-Após ter renomeado o arquivo .env.dist para .env, execute o seguinte comando:
+After renaming the .env.dist file to .env, run the following command
 
 ```bash
 docker compose up --build
 ```
 
-Ou utilizando o modo detach (liberar o terminal para outros usos):
+Or using detach mode (freeing up terminal for other uses):
 
 
 ```bash
 docker compose up --build -d
 ```
 
-Após gerado a build e iniciado os containers, a API estará disponível no seguinte endereço: http://localhost:3000
+After generating the build and starting containers, the API will be available at the following address: http://localhost:3000
